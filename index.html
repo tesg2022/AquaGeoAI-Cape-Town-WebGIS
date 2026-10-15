@@ -1,220 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b3d4f">
-  <meta name="description" content="AquaGeoAI Cape Town integrates Earth observation, climate data, geospatial analytics and hydrological modelling to support water security and climate resilience.">
-  <title>AquaGeoAI Cape Town | Water & Climate Intelligence</title>
-    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.css">
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#0b3d4f">
+    <meta name="description" content="AquaGeoAI Cape Town interactive WebGIS map.">
+    <title>AquaGeoAI Cape Town | Interactive WebGIS</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_80388f77c4fda7537eb8a9e1ad9f8ad5 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
 
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
 </head>
 <body>
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <span>Water security · Climate resilience · Geospatial intelligence</span>
-      <span>Cape Town, South Africa</span>
+    
+    
+            <header style="position:absolute;z-index:1000;top:12px;left:50px;max-width:calc(100% - 80px);padding:10px 14px;background:rgba(255,255,255,.96);border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.18);font-family:Arial,sans-serif;">
+      <strong style="color:#0b3d4f;">AquaGeoAI Cape Town</strong>
+      <div style="font-size:12px;color:#475569;">Interactive Water &amp; Climate WebGIS</div>
+    </header>
+    <div class="folium-map" id="map_80388f77c4fda7537eb8a9e1ad9f8ad5"></div>
+    <div style="position:absolute;z-index:1000;bottom:12px;left:12px;max-width:440px;padding:8px 10px;background:rgba(255,255,255,.95);border-radius:6px;font:11px/1.4 Arial,sans-serif;color:#475569;box-shadow:0 1px 6px rgba(0,0,0,.15);">
+      Basemap © OpenStreetMap contributors. Earth Engine tile URLs may expire. Confirm dataset names, dates, units and public-access permissions before publishing.
     </div>
-  </div>
-
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#home" aria-label="AquaGeoAI Cape Town home">
-        <span class="brand-mark" aria-hidden="true">⌁</span>
-        <span>
-          <span class="brand-name">AquaGeoAI Cape Town</span>
-          <span class="brand-sub" style="display:block">GeoAI-Powered Water &amp; Climate Intelligence</span>
-        </span>
-      </a>
-      <nav aria-label="Main navigation">
-        <a href="#solution">The Solution</a>
-        <a href="#live-map">Interactive Map</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#users">Who It Helps</a>
-        <a class="button button-primary" href="#platform">Explore Platform</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">Geospatial intelligence for water security</div>
-          <h1>AquaGeoAI Cape Town:<br><span>Water &amp; Climate Intelligence</span></h1>
-          <p class="hero-lead">
-            Turning Earth observation, climate data and hydrological modelling into
-            practical spatial insights for a more water-secure and climate-resilient Cape Town.
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#solution">Discover the Solution <span aria-hidden="true">→</span></a>
-            <a class="button button-outline" href="#capabilities">Explore Capabilities</a>
-          </div>
-          <p class="hero-note">Designed for water-resource managers, municipalities, researchers and environmental practitioners.</p>
-        </div>
-
-        <div class="visual-card" aria-label="Illustrative geospatial dashboard preview">
-          <div class="map-visual">
-            <div class="contour"></div><div class="contour c2"></div><div class="contour c3"></div>
-            <div class="map-label">CAPE TOWN · SPATIAL INTELLIGENCE</div>
-            <div class="map-pin" title="Illustrative map marker"></div>
-            <div class="map-stat">
-              <div class="stat-mini"><strong>Climate indicators</strong><span>Rainfall · ET · Vegetation</span></div>
-              <div class="stat-mini"><strong>Spatial insights</strong><span>Risk screening · Priorities</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="live-map-section" id="live-map">
-      <div class="container">
-        <div class="section-heading">
-          <div class="section-kicker">Interactive map</div>
-          <h2>Explore Cape Town geographically.</h2>
-          <p>Explore Cape Town with satellite-derived rainfall and vegetation indicators. Analytical layers require a configured Earth Engine backend and are labelled with their source and limitations.</p>
-        </div>
-        <div class="map-panel">
-          <div class="map-toolbar">
-            <div class="rainfall-controls">
-              <label for="map-layer">Data layer</label>
-              <select id="map-layer">
-                <option value="rainfall">Annual rainfall — CHIRPS</option>
-                <option value="ndvi">Vegetation condition — MODIS NDVI</option>
-              </select>
-              <label for="rainfall-year">Year</label>
-              <select id="rainfall-year">
-                <option value="2020">2020</option><option value="2021">2021</option><option value="2022">2022</option>
-                <option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option>
-              </select>
-              <button class="map-control-button" id="load-rainfall" type="button">Load data layer</button>
-            </div>
-            <div><strong>City of Cape Town</strong><span class="map-status"><span class="status-dot"></span> Basemap available · analysis requires API</span></div>
-            <button class="map-control-button" id="reset-map" type="button">Reset view</button>
-          </div>
-          <div id="aquageoai-map" role="application" aria-label="Interactive map centered on Cape Town, South Africa"></div>
-          <div class="map-legend" id="map-legend">
-            <strong>Layer legend</strong><span class="layer-chip">Load a data layer to view its legend</span>
-          </div>
-          <p class="map-disclaimer" id="map-status">Basemap ready. Start the FastAPI backend and configure Google Earth Engine to load analysis layers. Groundwater recharge and water-quality products are not yet operational.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="solution" id="solution">
-      <div class="container">
-        <div class="section-heading">
-          <div class="section-kicker">The solution</div>
-          <h2>From complex geospatial data to clearer decisions.</h2>
-          <p>
-            AquaGeoAI Cape Town is being developed as a GeoAI-powered WebGIS that brings
-            environmental data and spatial analysis into one practical decision-support experience.
-          </p>
-        </div>
-        <div class="solution-grid">
-          <div class="solution-copy">
-            <p>
-              The platform integrates Earth observation, climate data, geospatial analytics,
-              and hydrological modelling to strengthen water security and climate resilience
-              in Cape Town, South Africa.
-            </p>
-            <p>
-              It is designed to help stakeholders assess drought risk, analyse groundwater
-              recharge potential, monitor appropriate water-quality indicators, and identify
-              priority areas for climate adaptation.
-            </p>
-            <div class="highlight">
-              By transforming complex geospatial datasets into interactive maps, predictive
-              insights, and decision-support outputs, AquaGeoAI aims to help users identify
-              vulnerable areas, prioritize interventions, and make more informed water-resource
-              management decisions.
-            </div>
-            <p class="disclaimer">
-              Platform capabilities are being developed and validated. Results should be
-              interpreted with documented data limitations and model uncertainty.
-            </p>
-          </div>
-
-          <div class="feature-grid" id="capabilities">
-            <article class="feature">
-              <div class="feature-icon" aria-hidden="true">☀</div>
-              <h3>Earth Observation</h3>
-              <p>Use satellite-derived information to explore land cover, vegetation condition and environmental change.</p>
-            </article>
-            <article class="feature">
-              <div class="feature-icon" aria-hidden="true">🌦</div>
-              <h3>Climate &amp; Drought</h3>
-              <p>Compare rainfall and climate indicators to screen for areas experiencing environmental stress.</p>
-            </article>
-            <article class="feature">
-              <div class="feature-icon" aria-hidden="true">💧</div>
-              <h3>Groundwater &amp; Hydrology</h3>
-              <p>Support recharge-potential assessment through hydrological indicators and locally appropriate data.</p>
-            </article>
-            <article class="feature">
-              <div class="feature-icon" aria-hidden="true">🧭</div>
-              <h3>Decision Support</h3>
-              <p>Present interactive maps, spatial comparisons and priority-area insights to support planning.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="audience" id="users">
-      <div class="container">
-        <div class="section-heading">
-          <div class="section-kicker">Who it helps</div>
-          <h2>Built around real water and climate decisions.</h2>
-          <p>The platform is intended to support people who plan, manage, study and protect water resources and climate-sensitive landscapes.</p>
-        </div>
-        <div class="audience-grid">
-          <article class="audience-item"><span aria-hidden="true">🏙</span><strong>Municipalities &amp; Water Managers</strong><p>Explore spatial risks and support infrastructure and resource planning.</p></article>
-          <article class="audience-item"><span aria-hidden="true">🔬</span><strong>Researchers &amp; Hydrologists</strong><p>Bring environmental datasets together for analysis and hypothesis testing.</p></article>
-          <article class="audience-item"><span aria-hidden="true">🌿</span><strong>Environmental Consultants</strong><p>Screen vulnerable areas and communicate evidence to project teams.</p></article>
-          <article class="audience-item"><span aria-hidden="true">🌾</span><strong>Agricultural Stakeholders</strong><p>Explore climate and water indicators relevant to adaptation planning.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="workflow" id="platform">
-      <div class="container">
-        <div class="section-heading">
-          <div class="section-kicker">How it works</div>
-          <h2>A practical path from data to action.</h2>
-          <p>A clear workflow helps users move from understanding conditions to identifying where further investigation or intervention may be needed.</p>
-        </div>
-        <div class="steps">
-          <article class="step"><div class="step-number">STEP 01</div><h3>Integrate data</h3><p>Bring together satellite observations, climate datasets, boundaries and relevant local records.</p></article>
-          <article class="step"><div class="step-number">STEP 02</div><h3>Analyse indicators</h3><p>Calculate and compare rainfall, vegetation, evapotranspiration and hydrological indicators.</p></article>
-          <article class="step"><div class="step-number">STEP 03</div><h3>Assess priorities</h3><p>Use transparent screening methods and validated models to identify areas for closer assessment.</p></article>
-          <article class="step"><div class="step-number">STEP 04</div><h3>Support decisions</h3><p>Communicate findings through interactive maps, summaries and decision-support outputs.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta">
-      <div class="container cta-inner">
-        <div>
-          <div class="eyebrow">A more resilient water future</div>
-          <h2>See the risks. Understand the patterns. Prioritize action.</h2>
-          <p>AquaGeoAI Cape Town is being developed to turn spatial evidence into useful insights for water security and climate adaptation.</p>
-        </div>
-        <a class="button button-primary" href="#home">Back to top ↑</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <span>© <span id="year"></span> AquaGeoAI Cape Town</span>
-      <span>GeoAI-Powered Water and Climate Intelligence · Cape Town, South Africa</span>
-    </div>
-  </footer>
-    <script src="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.js" defer></script>
-  <script src="js/app.js" defer></script>
-
+        
 </body>
+<script>
+    
+    
+            var map_80388f77c4fda7537eb8a9e1ad9f8ad5 = L.map(
+                "map_80388f77c4fda7537eb8a9e1ad9f8ad5",
+                {
+                    center: [-34.0, 18.6],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 10,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var osmBasemap = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            osmBasemap.addTo(map_80388f77c4fda7537eb8a9e1ad9f8ad5);
+        
+    
+            var earthEngineLayer1 = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/tesggeospatial/maps/3edd2713ebcdfb4f160785aabef470fb-445a164bb11625b26351a89c7d14e535/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            earthEngineLayer1.addTo(map_80388f77c4fda7537eb8a9e1ad9f8ad5);
+        
+    
+            var earthEngineBoundaryLayer = L.tileLayer(
+                "https://earthengine.googleapis.com/v1/projects/tesggeospatial/maps/2922ab5f4ed44019c75148767bc2abaf-9ad240b7057b4751ace3fb4a64315e48/tiles/{z}/{x}/{y}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Google Earth Engine Boundary",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            earthEngineBoundaryLayer.addTo(map_80388f77c4fda7537eb8a9e1ad9f8ad5);
+        
+
+            L.control.layers(
+              { "OpenStreetMap basemap": osmBasemap },
+              {
+                "Earth Engine layer 1 (confirm dataset)": earthEngineLayer1,
+                "Earth Engine boundary layer": earthEngineBoundaryLayer
+              },
+              { collapsed: false }
+            ).addTo(map_80388f77c4fda7537eb8a9e1ad9f8ad5);
+            L.control.scale({ metric: true, imperial: false }).addTo(map_80388f77c4fda7537eb8a9e1ad9f8ad5);
+
+</script>
 </html>

@@ -1,0 +1,12 @@
+# Local and secret files
+.env
+.env.*
+!.env.example
+*credentials*
+*service-account*
+*.pem
+*.key
+__pycache__/
+.venv/
+venv/
+.DS_Store
